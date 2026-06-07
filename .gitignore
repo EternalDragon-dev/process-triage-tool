@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+
+# Local context / personal notes
+SENTINEL_CONTEXT.md
+
+# Generated logs and reports
+*.jsonl
+stress_test_public/public_correction_report.json
+stress_test_public/public_processes.csv
+stress_test_public/public_network_connections.csv
+stress_test_public/public_persistence_artifacts.csv
+
+# Temporary files
+*.tmp

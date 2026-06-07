@@ -1,0 +1,7 @@
+pid,name,path,command_line,parent
+1,system,C:\Windows\System32\system.exe,system init,0
+1023,svchost.exe,C:\Windows\System32\svchost.exe,svchost -k netsvcs,1
+2045,powershell.exe,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,powershell -enc aW1wb3J0YW50,1023
+3321,chrome.exe,C:\Program Files\Google\Chrome\chrome.exe,chrome.exe,2045
+4123,svchost.exe,C:\Users\User\AppData\Temp\svchost.exe,svchost.exe,1023
+5123,malware.exe,C:\Users\User\AppData\Temp\malware.exe,malware.exe,4123

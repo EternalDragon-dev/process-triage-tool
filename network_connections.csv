@@ -1,0 +1,6 @@
+pid,process_name,protocol,state,local_address,local_port,remote_address,remote_port,user,executable_path
+1023,svchost.exe,TCP,ESTABLISHED,10.0.0.12,49712,13.107.42.12,443,SYSTEM,C:\Windows\System32\svchost.exe
+2045,powershell.exe,TCP,ESTABLISHED,10.0.0.12,50100,8.8.8.8,4444,User,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+3321,chrome.exe,TCP,ESTABLISHED,10.0.0.12,50321,172.217.5.110,443,User,C:\Program Files\Google\Chrome\Application\chrome.exe
+4123,svchost.exe,TCP,ESTABLISHED,10.0.0.12,55001,104.16.33.249,8080,User,C:\Users\User\AppData\Temp\svchost.exe
+5123,malware.exe,TCP,LISTEN,0.0.0.0,3389,0.0.0.0,0,User,C:\Users\User\AppData\Temp\malware.exe
