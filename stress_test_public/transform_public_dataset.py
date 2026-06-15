@@ -36,7 +36,7 @@ for i, r in enumerate(rows, start=1):
             "ppid": 4,
             "name": name,
             "path": file_path or name,
-            "command_line": cmd,
+            "command_line": cmd or name,
             "user": user,
         }
     )
@@ -82,7 +82,7 @@ if not pers_out:
             "artifact_type": "unknown",
             "name": "none",
             "path": "UNKNOWN",
-            "command": "",
+            "command": "none",
             "user": "UNKNOWN",
             "schedule": "",
             "enabled": "false",
