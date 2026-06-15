@@ -1,0 +1,49 @@
+Project Name
+Sentinel Loop
+
+Tagline
+Evidence-driven DFIR triage that self-corrects confidence across process, network, and persistence signals.
+
+The Problem
+AI-enabled adversaries move at machine speed, while defenders often rely on fragmented, one-shot triage outputs. Single-domain detections are easy to mis-prioritize and hard to trust without corroboration. We needed a defensive agent workflow that can rapidly triage, cross-check evidence, and explicitly revise its confidence when data supports or contradicts initial findings.
+
+What We Built
+Sentinel Loop is a deterministic DFIR triage and correction system exposed through a custom MCP server. It provides:
+- Process triage wrapper
+- Network triage wrapper
+- Persistence triage wrapper
+- A cross-domain Hypothesis-Verification-Correction loop (`triage_all`)
+
+The correction engine correlates findings across domains and applies explicit correction types:
+- ESCALATED
+- CONFIRMED_UPWARD
+- DOWNGRADED
+- UNCONFIRMED
+
+Every run includes forensic audit events and report integrity hashing for traceability.
+
+How It Works
+1) Load normalized artifacts from CSV (process, network, persistence)
+2) Run deterministic domain rules to produce initial findings
+3) Correlate by PID/process-name relationships across domains
+4) Revise confidence up or down based on corroboration quality
+5) Emit corrected findings, correction events, audit trail, and SHA-256 report hash
+
+Why This Is Different
+- Not one-shot detection: it re-evaluates its own conclusions.
+- Bidirectional correction: confidence can increase or decrease.
+- Evidence integrity: deterministic behavior + auditable event chain + integrity hash.
+- MCP-native structured tools instead of unsafe generic command execution.
+
+Hackathon Alignment
+This project targets the Find Evil goal of autonomous defensive triage by emphasizing:
+- speed of triage,
+- analyst-like verification logic,
+- explicit self-correction,
+- and safe, inspectable tool boundaries.
+
+What’s Next
+- Expand protocol-aware and host-artifact rule coverage
+- Add temporal correlation windows and host/session context
+- Add additional benchmark cases with stronger ground-truth labeling
+- Integrate deeper with Protocol SIFT workflow orchestration

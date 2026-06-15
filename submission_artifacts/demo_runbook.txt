@@ -1,0 +1,43 @@
+Sentinel Loop Demo Runbook (Terminal)
+
+Goal
+Show deterministic triage + cross-domain self-correction + audit/integrity outputs in one short flow.
+
+Pre-demo setup
+1) Install dependencies
+python3 -m pip install -r requirements.txt
+
+2) Run tests
+python3 -m unittest discover -s tests -p "test_*.py"
+
+Main demo flow
+1) Process triage
+python3 main.py --input tests/data/processes.csv --pretty --no-audit-events
+
+2) Network triage
+python3 network_main.py --input tests/data/network_connections.csv --pretty --no-audit-events
+
+3) Persistence triage
+python3 persistence_main.py --input tests/data/persistence_artifacts.csv --pretty --no-audit-events
+
+4) Full correction loop
+python3 correction_main.py \
+  --processes-csv tests/data/processes.csv \
+  --network-csv tests/data/network_connections.csv \
+  --persistence-csv tests/data/persistence_artifacts.csv \
+  --pretty \
+  --no-audit-events
+
+Narration cues
+- “These first three wrappers produce initial hypotheses by domain.”
+- “Now the correction engine cross-references evidence and revises confidence.”
+- “Notice correction types can move both upward and downward.”
+- “Every report includes deterministic structure and integrity metadata.”
+
+Fallback quick demo (single command)
+python3 correction_main.py \
+  --processes-csv tests/data/processes.csv \
+  --network-csv tests/data/network_connections.csv \
+  --persistence-csv tests/data/persistence_artifacts.csv \
+  --pretty \
+  --no-audit-events

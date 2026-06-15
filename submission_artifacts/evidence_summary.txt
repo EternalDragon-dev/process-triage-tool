@@ -1,0 +1,28 @@
+Sentinel Loop Evidence Summary
+
+Deterministic regression/tests
+- Command: python3 -m unittest discover -s tests -p "test_*.py"
+- Result: PASS
+
+Demo dataset outputs (tests/data)
+- Process report_type: sentinel_loop.process_triage.v1
+- Network report_type: sentinel_loop.network_triage.v1
+- Persistence report_type: sentinel_loop.persistence_triage.v1
+- Correction report_type: sentinel_loop.correction_engine.v1
+
+Observed counts from latest smoke run
+- Process findings: 2
+- Network findings: 4
+- Persistence findings: 2
+- Corrected findings: 8
+
+Correction behavior demonstrated
+- ESCALATED present
+- CONFIRMED_UPWARD present
+- DOWNGRADED present
+
+Evidence-integrity mechanisms
+- Deterministic rule wrappers
+- Cross-domain confidence revision
+- Structured audit event logging
+- SHA-256 report integrity field

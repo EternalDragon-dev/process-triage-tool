@@ -1,0 +1,2 @@
+artifact_type,name,path,command,user,schedule,enabled
+cron,evil-cron,/tmp/evil.sh,powershell.exe -enc aQBlAHgA,alice,* * * * *,true

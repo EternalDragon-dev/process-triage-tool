@@ -1,0 +1,31 @@
+Final Submission Checklist (Find Evil)
+
+Code and reproducibility
+[ ] Public repository is accessible
+[ ] README quickstart executes as written
+[ ] CI workflow exists and passes
+[ ] Tests pass locally
+
+Demo and media
+[ ] Demo video is public and accessible
+[ ] Demo follows runbook in submission_artifacts/demo_runbook.txt
+[ ] Screenshots/thumbnail ready for Devpost gallery
+
+Devpost form content
+[ ] Project name + tagline finalized
+[ ] Project story finalized (submission_artifacts/devpost_project_story.txt)
+[ ] Built-with tags finalized
+[ ] Repository URL included
+[ ] Demo URL included
+[ ] Try-it-out instructions included
+
+Evidence quality
+[ ] Stress/benchmark outputs linked
+[ ] Evidence summary verified (submission_artifacts/evidence_summary.txt)
+[ ] Self-correction behavior clearly shown
+[ ] Limitations and future work clearly stated
+
+Final QA
+[ ] All links checked from incognito/private browser
+[ ] No placeholder text remains in submission
+[ ] Submission reviewed end-to-end before final click

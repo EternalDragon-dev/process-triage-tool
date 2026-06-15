@@ -17,6 +17,33 @@ For student-friendly deep dives into architecture, software engineering, and cyb
 - Returns structured JSON suitable for MCP/LLM pipelines.
 - Captures forensic audit events and can write them as JSONL.
 
+## Find Evil / Protocol SIFT Alignment
+Sentinel Loop is designed as a custom MCP triage-and-correction layer that can sit in a Protocol SIFT workflow.
+- **Custom MCP tools instead of generic shell execution:** `mcp_server.py` exposes typed tools for process/network/persistence triage and full cross-domain correction.
+- **Evidence-integrity posture:** deterministic rule execution, explicit correction reasoning, audit lifecycle events, and report integrity hashes.
+- **Self-correction behavior:** the correction engine raises or lowers confidence based on corroborating or missing evidence across domains.
+
+## Reproducible Setup and Validation
+Install and run with pinned dependency range:
+```bash
+python3 -m pip install -r requirements.txt
+python3 -m unittest discover -s tests -p "test_*.py"
+python3 correction_main.py \
+  --processes-csv tests/data/processes.csv \
+  --network-csv tests/data/network_connections.csv \
+  --persistence-csv tests/data/persistence_artifacts.csv \
+  --no-audit-events \
+  --pretty
+```
+
+## Structured Error Contract
+If an input file is missing or malformed, CLI and MCP wrappers return a structured error payload:
+- `report_type`: `sentinel_loop.error.v1`
+- `error.code`: stable machine-readable code
+- `error.domain`: failing domain (`process`, `network`, `persistence`, `correction`, or `mcp`)
+- `error.message`: human-readable issue summary
+- `error.details`: row/column/path context where available
+
 ## Run
 ```bash
 python3 main.py --input processes.csv --pretty --audit-log audit_log.jsonl
@@ -212,6 +239,14 @@ The server will use local CSV files by default (`processes.csv`, `network_connec
 - `input_path`
 - `include_audit_events`
 - `audit_log_path`
+
+## Final Submission Artifact Checklist
+Use this checklist before Devpost submission freeze:
+- Public repository URL with complete setup and run instructions.
+- Public demo video URL showing autonomous triage plus correction behavior.
+- Evidence bundle references (stress-test report, audit log, integrity hash, reproducible commands).
+- Architecture narrative mapping Sentinel Loop to Find Evil goals: autonomous DFIR triage, self-correction, and evidence integrity.
+- Confirmed CI + tests green (`.github/workflows/ci.yml`, `tests/`).
 
 ## JSON Output
 The CLI prints one JSON report with:

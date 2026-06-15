@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from error_reporting import emit_cli_error
 
 from correction_engine.engine import run_correction_loop
 from process_triage.audit import AuditLogger
@@ -64,16 +65,18 @@ def _parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = _parse_args()
-    audit_logger = AuditLogger(enabled=True)
-
-    report = run_correction_loop(
-        processes_csv=args.processes_csv,
-        network_csv=args.network_csv,
-        persistence_csv=args.persistence_csv,
-        include_audit_events=not args.no_audit_events,
-        audit_log_path=args.audit_log,
-        audit_logger=audit_logger,
-    )
+    try:
+        audit_logger = AuditLogger(enabled=True)
+        report = run_correction_loop(
+            processes_csv=args.processes_csv,
+            network_csv=args.network_csv,
+            persistence_csv=args.persistence_csv,
+            include_audit_events=not args.no_audit_events,
+            audit_log_path=args.audit_log,
+            audit_logger=audit_logger,
+        )
+    except Exception as exc:
+        emit_cli_error(domain="correction", pretty=args.pretty, exc=exc)
 
     indent = 2 if args.pretty else None
     sys.stdout.write(json.dumps(report, indent=indent))

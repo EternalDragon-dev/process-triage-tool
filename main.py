@@ -1,3 +1,4 @@
+from error_reporting import emit_cli_error
 import argparse
 import json
 
@@ -35,17 +36,20 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    audit_logger = AuditLogger(enabled=True)
-    processes = load_processes_csv(args.input, audit_logger=audit_logger)
-    report = run_triage(
-        processes=processes,
-        source=args.input,
-        audit_logger=audit_logger,
-        include_audit_events=not args.no_audit_events,
-    )
+    try:
+        audit_logger = AuditLogger(enabled=True)
+        processes = load_processes_csv(args.input, audit_logger=audit_logger)
+        report = run_triage(
+            processes=processes,
+            source=args.input,
+            audit_logger=audit_logger,
+            include_audit_events=not args.no_audit_events,
+        )
 
-    if args.audit_log:
-        audit_logger.write_jsonl(args.audit_log)
+        if args.audit_log:
+            audit_logger.write_jsonl(args.audit_log)
+    except Exception as exc:
+        emit_cli_error(domain="process", pretty=args.pretty, path=args.input, exc=exc)
 
     if args.pretty:
         print(json.dumps(report, indent=2))
